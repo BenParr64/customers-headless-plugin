@@ -9,6 +9,8 @@
 * License: GPL2
 */
 
+require_once plugin_dir_path( __FILE__ ) . 'functions.php';
+
 function custom_orders_endpoint() {
     register_rest_route( 'wc/v3', '/orders/mine', array(
         'methods' => 'GET',
