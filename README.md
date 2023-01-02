@@ -14,5 +14,10 @@ To access the orders endpoint, send a GET request to `/wp-json/wc/v3/orders/mine
 ## Customer Endpoint
 To access the customer endpoint, send a GET request to `/wp-json/wc/v3/customers/mine`. The response will contain an object with the customer's data, including their billing and shipping addresses.
 
-Support
+## Support
 If you have any issues with the plugin, please contact me for support.
+
+## License 📜
+License: GPL v2
+
+- GPLv2
