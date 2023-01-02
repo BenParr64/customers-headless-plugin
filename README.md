@@ -1,9 +1,10 @@
 # Customers Headless Plugin
-This plugin allows customers to access their own orders and customer data using the WooCommerce REST API.
+This plugin allows customers to access their own orders and customer data using the WooCommerce REST API. This plugin also uses JWT tokens which are often obtained from the [JWT Authentication for WP-API](https://wordpress.org/plugins/jwt-authentication-for-wp-rest-api/) plugin.
 
 ## Installation
 1. Download the plugin files and upload them to your WordPress site.
 2. Activate the plugin from the Plugins menu in the WordPress admin dashboard.
+3. Download and activate the [JWT Authentication for WP-API](https://wordpress.org/plugins/jwt-authentication-for-wp-rest-api/)
 
 ## Usage
 To use the plugin, you must send a JWT token in the Authorization header of your request. The token must be signed with the secret key that you have configured in the plugin settings.
