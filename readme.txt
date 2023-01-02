@@ -1,4 +1,4 @@
-=== Headless CMS ===
+=== Customers Headless ===
 Contributors: benparr64
 Tags: headless-cms, jwt woocommerce, jwt authentication
 Requires at least: 4.6
