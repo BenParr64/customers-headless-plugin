@@ -1,6 +1,6 @@
 <?php
 /*
-* Plugin Name: Customers Headless Plugin
+* Plugin Name: Customers Headless
 * Plugin URI:
 * Description: A plugin that allows customers to access their own orders and customer data using the WooCommerce REST API.
 * Version: 1.0.0
