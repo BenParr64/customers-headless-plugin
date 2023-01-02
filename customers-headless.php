@@ -23,20 +23,30 @@ function custom_orders_callback( $request ) {
     // Get the current user ID
     $user_id = get_current_user_id();
     if ( ! $user_id ) {
-        wp_send_json_error( __( 'You are not currently logged in.' ) );
         return new WP_Error( 'rest_not_logged_in', __( 'You are not currently logged in.' ), array( 'status' => 401 ) );
     }
 
     // Get the orders for the current user
-    $orders = wc_get_orders( array( 'customer' => $user_id ) );
+    $orders = wc_get_orders( array( 'customer_id' => $user_id ) );
+
     if ( empty( $orders ) ) {
-        wp_send_json_error( __( 'No orders were found for the current user.' ) );
-        return new WP_Error( 'rest_no_orders_found', __( 'No orders were found for the current user.' ), array( 'status' => 404 ) );
+        $orders = array();
     }
 
-    // Return the orders in the response
-    wp_send_json_success( $orders );
-    return $orders;
+    // Initialize the response array
+    $response = array();
+
+    // Loop through the orders and add the order data to the response array
+    foreach ( $orders as $order ) {
+        $response[] = array(
+            'order_total' => $order->get_total(),
+            'line_items' => $order->get_items(),
+            'order_date' => $order->get_date_created(),
+        );
+    }
+
+    // Return the response array
+    return $response;
 }
 
 function custom_orders_authentication( $user, $token, $auth_data ) {
