@@ -23,16 +23,19 @@ function custom_orders_callback( $request ) {
     // Get the current user ID
     $user_id = get_current_user_id();
     if ( ! $user_id ) {
+        wp_send_json_error( __( 'You are not currently logged in.' ) );
         return new WP_Error( 'rest_not_logged_in', __( 'You are not currently logged in.' ), array( 'status' => 401 ) );
     }
 
     // Get the orders for the current user
     $orders = wc_get_orders( array( 'customer' => $user_id ) );
     if ( empty( $orders ) ) {
+        wp_send_json_error( __( 'No orders were found for the current user.' ) );
         return new WP_Error( 'rest_no_orders_found', __( 'No orders were found for the current user.' ), array( 'status' => 404 ) );
     }
 
     // Return the orders in the response
+    wp_send_json_success( $orders );
     return $orders;
 }
 
