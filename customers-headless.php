@@ -13,8 +13,8 @@ require_once plugin_dir_path( __FILE__ ) . 'functions.php';
 require_once plugin_dir_path( __FILE__ ) . 'customer-functions.php';
 require_once plugin_dir_path( __FILE__ ) . 'customer-rest-endpoints.php';
 
-add_action( 'rest_api_init', 'custom_orders_endpoint' );
-add_action( 'rest_api_init', 'custom_order_endpoint' );
-add_action( 'rest_api_init', 'custom_customer_endpoint' );
-add_filter( 'jwt_auth_validate_token', 'customer_authentication', 10, 3 );
+add_action( 'rest_api_init', 'kegthat_orders_endpoint' );
+add_action( 'rest_api_init', 'kegthat_order_endpoint' );
+add_action( 'rest_api_init', 'kegthat_customer_endpoint' );
+add_filter( 'jwt_auth_validate_token', 'kegthat_customer_authentication', 10, 3 );
 

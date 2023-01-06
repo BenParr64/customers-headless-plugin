@@ -106,7 +106,7 @@ function kegthat_customer_callback( $request ) {
     );
 }
 
-function kegthat_authentication( $user, $token, $auth_data ) {
+function kegthat_customer_authentication( $user, $token, $auth_data ) {
     // Validate the JWT token
     try {
         // Decode the token and get the user data
