@@ -20,6 +20,7 @@ function kegthat_orders_callback( $request ) {
     // Loop through the orders and add the order data to the response array
     foreach ( $orders as $order ) {
         $response[] = array(
+            'order_id' => $order->get_id(),
             'order_total' => $order->get_total(),
             'line_items' => $order->get_items(),
             'order_date' => $order->get_date_created(),
