@@ -1,15 +1,22 @@
 <?php
 
-function custom_customer_endpoint() {
+function kegthat_customer_endpoint() {
     register_rest_route( 'wc/v3', '/customer/mine', array(
         'methods' => 'GET',
-        'callback' => 'custom_customer_callback',
+        'callback' => 'kegthat_customer_callback',
     ) );
 }
 
-function custom_orders_endpoint() {
+function kegthat_orders_endpoint() {
     register_rest_route( 'wc/v3', '/orders/mine', array(
         'methods' => 'GET',
-        'callback' => 'custom_orders_callback',
+        'callback' => 'kegthat_orders_callback',
+    ) );
+}
+
+function kegthat_order_endpoint() {
+    register_rest_route( 'wc/v3', '/orders/mine/(?P<id>\d+)', array(
+        'methods' => 'GET',
+        'callback' => 'kegthat_order_callback',
     ) );
 }
