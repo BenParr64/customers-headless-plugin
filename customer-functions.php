@@ -95,15 +95,15 @@ function kegthat_order_callback( WP_REST_Request $request ) {
         return new WP_Error( 'unauthorized_order', 'Unauthorized order', array( 'status' => 401 ) );
     }
 
-    $response = (
+    $response = array(
         'order_id' => $order->get_id(),
         'order_total' => $order->get_total(),
         'line_items' => $order->get_items(),
         'order_date' => $order->get_date_created(),
     );
-
-    // Return the response array
+    
     return $response;
+    
 }
 
 function kegthat_authentication( $user, $token, $auth_data ) {
