@@ -31,6 +31,38 @@ function kegthat_orders_callback( $request ) {
     return $response;
 }
 
+function kegthat_order_callback( $request ) {
+    // Get the current user ID
+    $user_id = get_current_user_id();
+    if ( ! $user_id ) {
+        return new WP_Error( 'rest_not_logged_in', __( 'You are not currently logged in.' ), array( 'status' => 401 ) );
+    }
+
+    // Get the order ID from the request
+    $order_id = $request['id'];
+
+    // Get the order
+    $order = wc_get_order( $order_id );
+    if ( ! $order ) {
+        return new WP_Error( 'invalid_order', 'Invalid order', array( 'status' => 404 ) );
+    }
+
+    // Make sure the order belongs to the current user
+    if ( $order->get_customer_id() !== $user_id ) {
+        return new WP_Error( 'unauthorized_order', 'Unauthorized order', array( 'status' => 401 ) );
+    }
+
+    $response = array(
+        'order_id' => $order->get_id(),
+        'order_total' => $order->get_total(),
+        'line_items' => $order->get_items(),
+        'order_date' => $order->get_date_created(),
+    );
+    
+    return $response;
+    
+}
+
 function kegthat_customer_callback( $request ) {
     // Get the current user ID
     $user_id = get_current_user_id();
@@ -72,38 +104,6 @@ function kegthat_customer_callback( $request ) {
             'country' => $customer->get_shipping_country(),
         ),
     );
-}
-
-function kegthat_order_callback( WP_REST_Request $request ) {
-    // Get the current user ID
-    $user_id = get_current_user_id();
-    if ( ! $user_id ) {
-        return new WP_Error( 'rest_not_logged_in', __( 'You are not currently logged in.' ), array( 'status' => 401 ) );
-    }
-
-    // Get the order ID from the request
-    $order_id = $request['id'];
-
-    // Get the order
-    $order = wc_get_order( $order_id );
-    if ( ! $order ) {
-        return new WP_Error( 'invalid_order', 'Invalid order', array( 'status' => 404 ) );
-    }
-
-    // Make sure the order belongs to the current user
-    if ( $order->get_customer_id() !== $user_id ) {
-        return new WP_Error( 'unauthorized_order', 'Unauthorized order', array( 'status' => 401 ) );
-    }
-
-    $response = array(
-        'order_id' => $order->get_id(),
-        'order_total' => $order->get_total(),
-        'line_items' => $order->get_items(),
-        'order_date' => $order->get_date_created(),
-    );
-    
-    return $response;
-    
 }
 
 function kegthat_authentication( $user, $token, $auth_data ) {
