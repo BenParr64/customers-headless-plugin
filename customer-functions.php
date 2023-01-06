@@ -106,8 +106,6 @@ function kegthat_order_callback( WP_REST_Request $request ) {
     return $response;
 }
 
-add_action( 'rest_api_init', 'custom_order_endpoint' );
-
 function kegthat_authentication( $user, $token, $auth_data ) {
     // Validate the JWT token
     try {
